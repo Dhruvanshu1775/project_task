@@ -1,0 +1,17 @@
+<h1>Hello {{request.user}}</h1>
+
+<br>
+<br>
+<a href="{% url 'add_restaurent' %}">Add Restaurent</a>
+<br>
+<br>
+<a href="{% url 'restaurent_list' %}">Place Order</a>
+<br>
+<br>
+<br>
+
+<form action="{% url 'logout' %}" method="POST">
+	{% csrf_token %}
+	<input type="hidden" name="">
+	<button type="submit">Logout</button>
+</form>

@@ -1,0 +1,62 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<h1>Place Your Favourite dish here</h1>
+<br>
+{% if messages %}
+{% for message in messages %}
+<b style="color: blue" font-size="25"> {{message}} </b>
+{% endfor %}
+{% endif %}
+
+<br>
+<form method="POST" action="{% url 'place_order' restaurent_obj.id %}">
+	{% csrf_token %}
+	<label>Select Dish</label>
+	<select name="dish">
+		<option>Select</option>
+		{% for dish in dish_obj %}
+		<option value="{{dish.id}}">Plate:{{dish.name}} <div id="price">price:{{dish.price}}</div> </option>
+		{% endfor %}
+	</select><br>
+	<label>Enter Quantity</label>
+	<input type="number" name="Quantity" id="Quantity"><br>
+	<button type="submit">Submit</button>
+</form>
+<br>
+<br>
+<br>
+{% if order_obj %}
+<h1>Order List</h1>
+<br>
+<br>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Restaurent</th>
+      <th scope="col">Dish</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Total</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% for order in order_obj %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{order.restaurent_key.name}}</td>
+      <td>{{order.dish_key.name}}</td>
+      <td>{{order.quantity}}</td>
+      <td>{{order.amount}}</td>
+      <td>{{order.status.status}}</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+<script type="text/javascript">
+	console.log("hey")
+</script>

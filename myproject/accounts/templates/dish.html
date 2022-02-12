@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<h1>Add Dish</h1>
+<br>
+<br>
+<br>
+<form method="POST" action="{% url 'add_dish' restaurent_obj.id %}">
+	{% csrf_token %}
+	<label>Enter Dish name</label>
+	<input type="text" name="name"><br>
+	<label>Enter Dish Price</label>
+	<input type="number" name="price"><br>
+	<button type="submit">Create Dish</button>
+</form>
+<br>
+<br>
+<br>
+{% if dish_obj %}
+<h1>Dish List</h1>
+<br>
+<br>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+  	{% for dish in dish_obj %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{dish.name}}</td>
+      <td>{{dish.price}}</td>
+     
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}

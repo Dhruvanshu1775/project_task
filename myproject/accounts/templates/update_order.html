@@ -1,0 +1,22 @@
+<h1>Change order Update</h1>
+<br>
+<br>
+<br>
+<form action="{% url 'update_order' order_obj.id %}" method="POST">
+	{% csrf_token %}
+	<label>Order By : {{order_obj.user_key}}</label><br>
+		{{order_obj.status}}
+
+
+	<select name="status">
+		<option value="{{order_obj.status.id}}">{{order_obj.status}}</option>
+		{% for status in status_obj %}
+		{% if status.id != order_obj.status.id%}
+		<option value="{{status.id}}">{{status.status}}</option>
+		{% endif %}
+		{% endfor %}
+		
+	</select><br>
+	<button type="submit">Change Status</button>
+</form>
+
